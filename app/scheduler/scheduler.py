@@ -1,8 +1,9 @@
+import logging
 from apscheduler.schedulers.blocking import BlockingScheduler
 from app.constants import TRACKED_ASSETS
 from app.pipeline.runner import execute_pipeline
 
-
+logger = logging.getLogger(__name__)
 def run_scheduled_etl() -> None:
     execute_pipeline(TRACKED_ASSETS)
 
@@ -17,7 +18,7 @@ def main() -> None:
         id="daily_finance_etl",
         replace_existing=True,
     )
-    print("Scheduler started. ETL will run daily at 00:00 UTC.")
+    logger.info("Starting ETL scheduler")
     scheduler.start()
 
 

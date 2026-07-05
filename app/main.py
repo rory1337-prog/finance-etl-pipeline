@@ -1,4 +1,5 @@
 import argparse
+from app.logging_config import setup_logging
 from app.constants import TRACKED_ASSETS
 from app.pipeline.runner import execute_pipeline
 
@@ -25,6 +26,7 @@ def get_assets_to_process(args: argparse.Namespace) -> tuple[dict, ...]:
 
 
 def main() -> None:
+    setup_logging()
     args = parse_args()
     assets = get_assets_to_process(args)
     execute_pipeline(assets)

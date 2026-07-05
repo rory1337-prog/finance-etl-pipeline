@@ -1,3 +1,4 @@
+import logging
 import pandas as pd
 from sqlalchemy.orm import Session
 from app.extract.base import MarketDataProvider
@@ -7,6 +8,7 @@ from app.repositories.metrics_repository import MetricRepository
 from app.repositories.etl_run_repository import ETLRunRepository
 from app.transform.indicators import calculate_indicators
 
+logger = logging.getLogger(__name__)
 
 class ETLService:
     def __init__(self, db: Session, provider: MarketDataProvider) -> None:
@@ -25,7 +27,7 @@ class ETLService:
             symbol=symbol, interval=interval, limit=limit
         )
         rows_inserted = self.prices.upsert_candles(asset_id=asset.id, candles=candles)
-        self.db.commit()
+        logger.info("Loaded %s candles for %s", rows_inserted, symbol)
 
         return rows_inserted
 
@@ -62,5 +64,5 @@ class ETLService:
             asset_id=asset.id,
             metrics_rows=metrics_rows,
         )
-        self.db.commit()
+        logger.info("Saved %s metrics for %s", rows_upserted, symbol)
         return rows_upserted
