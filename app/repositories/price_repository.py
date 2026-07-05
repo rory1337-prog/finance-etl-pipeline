@@ -26,3 +26,11 @@ class PriceRepository:
         stmt = stmt.on_conflict_do_nothing(index_elements=["asset_id", "timestamp"])
         result = self.db.execute(stmt)
         return result.rowcount or 0
+    
+    def get_by_asset_id(self, asset_id: int) -> list[PriceHistory]:
+        return (
+            self.db.query(PriceHistory)
+            .filter(PriceHistory.asset_id == asset_id)
+            .order_by(PriceHistory.timestamp.asc())
+            .all()
+        )
