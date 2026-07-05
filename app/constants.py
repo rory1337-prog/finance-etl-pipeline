@@ -11,3 +11,22 @@ DEFAULT_ASSET = {
     "asset_type": "crypto",
     "currency": "USDT",
 }
+
+TRACKED_ASSETS = (
+    {
+        "symbol": "BTC-USDT",
+        "name": "Bitcoin",
+    },
+    {
+        "symbol": "ETH-USDT",
+        "name": "Ethereum",
+    },
+    {
+        "symbol": "SOL-USDT",
+        "name": "Solana",
+    },
+    {
+        "symbol": "BNB-USDT",
+        "name": "BNB",
+    },
+)
