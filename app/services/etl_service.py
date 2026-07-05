@@ -10,6 +10,7 @@ from app.transform.indicators import calculate_indicators
 
 logger = logging.getLogger(__name__)
 
+
 class ETLService:
     def __init__(self, db: Session, provider: MarketDataProvider) -> None:
         self.db = db

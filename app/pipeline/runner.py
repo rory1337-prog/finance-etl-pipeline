@@ -6,6 +6,7 @@ from app.services.etl_service import ETLService
 
 logger = logging.getLogger(__name__)
 
+
 def execute_pipeline(assets: tuple[dict, ...]) -> None:
     logger.info("Finance ETL pipeline started")
     provider = BingXProvider()

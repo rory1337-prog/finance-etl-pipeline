@@ -4,6 +4,8 @@ from app.constants import TRACKED_ASSETS
 from app.pipeline.runner import execute_pipeline
 
 logger = logging.getLogger(__name__)
+
+
 def run_scheduled_etl() -> None:
     execute_pipeline(TRACKED_ASSETS)
 
