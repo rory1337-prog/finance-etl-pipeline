@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from app.db.models import PriceHistory
 from app.extract.base import Candle
 
+
 class PriceRepository:
     def __init__(self, db: Session) -> None:
         self.db = db
@@ -26,7 +27,7 @@ class PriceRepository:
         stmt = stmt.on_conflict_do_nothing(index_elements=["asset_id", "timestamp"])
         result = self.db.execute(stmt)
         return result.rowcount or 0
-    
+
     def get_by_asset_id(self, asset_id: int) -> list[PriceHistory]:
         return (
             self.db.query(PriceHistory)

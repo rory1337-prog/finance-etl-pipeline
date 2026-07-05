@@ -7,9 +7,7 @@ from app.db.session import SessionLocal
 def main():
     with SessionLocal() as db:
         rows = db.scalars(
-            select(DailyMetric)
-            .order_by(DailyMetric.timestamp.desc())
-            .limit(5)
+            select(DailyMetric).order_by(DailyMetric.timestamp.desc()).limit(5)
         ).all()
 
         for row in rows:

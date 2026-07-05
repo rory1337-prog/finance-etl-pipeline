@@ -2,8 +2,10 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 from app.constants import TRACKED_ASSETS
 from app.pipeline.runner import execute_pipeline
 
+
 def run_scheduled_etl() -> None:
     execute_pipeline(TRACKED_ASSETS)
+
 
 def main() -> None:
     scheduler = BlockingScheduler(timezone="UTC")

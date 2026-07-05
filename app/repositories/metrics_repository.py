@@ -3,10 +3,11 @@ from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.orm import Session
 from app.db.models import DailyMetric
 
+
 class MetricRepository:
-    def __init__(self ,db: Session) -> None:
+    def __init__(self, db: Session) -> None:
         self.db = db
-    
+
     def upsert_metrics(self, asset_id: int, metrics_rows: list[dict]) -> int:
         if not metrics_rows:
             return 0
@@ -36,7 +37,7 @@ class MetricRepository:
         )
         result = self.db.execute(stmt)
         return result.rowcount or 0
-    
+
     @staticmethod
     def _to_decimal(value: float | None) -> Decimal | None:
         if value is None:
