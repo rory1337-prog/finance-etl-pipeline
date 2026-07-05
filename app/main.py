@@ -2,12 +2,14 @@ import argparse
 from app.constants import TRACKED_ASSETS
 from app.pipeline.runner import execute_pipeline
 
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Finance ETL Pipeline")
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("--all", action="store_true")
     group.add_argument("--asset", type=str)
     return parser.parse_args()
+
 
 def get_assets_to_process(args: argparse.Namespace) -> tuple[dict, ...]:
     if args.all:
@@ -20,6 +22,7 @@ def get_assets_to_process(args: argparse.Namespace) -> tuple[dict, ...]:
         available = ", ".join(item["symbol"] for item in TRACKED_ASSETS)
         raise ValueError(f"Unknown asset: {args.asset}. Available: {available}")
     return (asset,)
+
 
 def main() -> None:
     args = parse_args()

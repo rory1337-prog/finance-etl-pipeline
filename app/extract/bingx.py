@@ -4,11 +4,14 @@ import requests
 from app.config import settings
 from app.extract.base import Candle, MarketDataProvider
 
+
 class BingXProvider(MarketDataProvider):
     def __init__(self) -> None:
         self.base_url = settings.bingx_base_url
 
-    def get_klines(self, symbol: str, interval: str = "1d", limit: int = 365) -> list[Candle]:
+    def get_klines(
+        self, symbol: str, interval: str = "1d", limit: int = 365
+    ) -> list[Candle]:
         url = f"{self.base_url}/openApi/swap/v3/quote/klines"
         params = {
             "symbol": symbol,

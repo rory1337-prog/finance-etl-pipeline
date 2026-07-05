@@ -3,6 +3,7 @@ from app.db.session import SessionLocal
 from app.extract.bingx import BingXProvider
 from app.services.etl_service import ETLService
 
+
 def execute_pipeline(assets: tuple[dict, ...]) -> None:
     provider = BingXProvider()
     with SessionLocal() as db:
