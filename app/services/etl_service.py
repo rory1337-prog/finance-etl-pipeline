@@ -4,6 +4,7 @@ from app.extract.base import MarketDataProvider
 from app.repositories.asset_repository import AssetRepository
 from app.repositories.price_repository import PriceRepository
 from app.repositories.metrics_repository import MetricRepository
+from app.repositories.etl_run_repository import ETLRunRepository
 from app.transform.indicators import calculate_indicators
 
 class ETLService:
@@ -13,6 +14,7 @@ class ETLService:
         self.assets = AssetRepository(db)
         self.prices = PriceRepository(db)
         self.metrics = MetricRepository(db)
+        self.etl_runs = ETLRunRepository(db)
 
     def load_market_data(self, symbol: str, name: str, interval: str = "1d", limit: int = 365) -> int:
         asset = self.assets.get_or_create(symbol=symbol, name=name)
